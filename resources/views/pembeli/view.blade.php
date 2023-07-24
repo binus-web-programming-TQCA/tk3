@@ -44,11 +44,11 @@
 
                         <div class="flex">
                             <div class="flex items-center pl-4 pr-4 mr-8 border border-gray-200 rounded dark:border-gray-700">
-                                <input id="jenis_kelamin_laki_laki" type="radio" value="laki-laki" name="jenis_kelamin" {{ ($data->jenis_kelamin=="laki-laki")? "checked" : "" }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <input id="jenis_kelamin_laki_laki" type="radio" value="laki-laki" name="jenis_kelamin" {{ ($data->jenis_kelamin=="laki-laki")? "checked" : "" }} disabled class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 <label for="jenis_kelamin_laki_laki" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Laki-Laki</label>
                             </div>
                             <div class="flex items-center pl-4 pr-4 border border-gray-200 rounded dark:border-gray-700">
-                                <input checked id="jenis_kelamin_perempuan" type="radio" value="perempuan" name="jenis_kelamin" {{ ($data->jenis_kelamin=="perempuan")? "checked" : "" }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <input checked id="jenis_kelamin_perempuan" type="radio" value="perempuan" name="jenis_kelamin" {{ ($data->jenis_kelamin=="perempuan")? "checked" : "" }} disabled class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 <label for="jenis_kelamin_perempuan" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Perempuan</label>
                             </div>
                         </div>

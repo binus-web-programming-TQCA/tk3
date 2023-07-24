@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/pembeli', [PembeliController::class, 'list'])->name('pembeli.list');
     Route::get('/pembeli/add', [PembeliController::class, 'add'])->name('pembeli.add');
+    Route::get('/pembeli/edit/{id}', [PembeliController::class, 'edit'])->name('pembeli.edit');
+    Route::post('/pembeli/update/{id}', [PembeliController::class, 'update'])->name('pembeli.update');
     Route::get('/pembeli/delete/{id}', [PembeliController::class, 'delete'])->name('pembeli.delete');
     Route::get('/pembeli/{id}', [PembeliController::class, 'view'])->name('pembeli.view');
     Route::post('/pembeli', [PembeliController::class, 'store'])->name('pembeli.store');

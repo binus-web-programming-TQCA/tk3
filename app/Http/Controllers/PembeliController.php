@@ -55,4 +55,42 @@ class PembeliController extends Controller
         $data->delete();
         return redirect()->route('pembeli.list');
     }
+
+    public function edit($id) {
+        $data = Pembeli::findOrFail($id);
+        return view('pembeli.edit', ['data' => $data]);
+    }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'nama' => ['required', 'string', 'max:255'],
+            'user' => ['required', 'string', 'max:255', 'unique:'.Pembeli::class],
+            'tempat_lahir' => ['required', 'string'],
+            'tanggal_lahir' => ['required', 'string'],
+            'jenis_kelamin' => ['required', 'string'],
+            'alamat' => ['required', 'string'],
+        ]);
+
+        if ($request->input('password') != "") {
+            $request->validate([
+                'password' => ['confirmed', Rules\Password::defaults()],
+            ]);
+        }
+
+        $data = Pembeli::findOrFail($id);
+        $data->nama = $request->input('nama');
+        $data->tempat_lahir = $request->input('tempat_lahir');
+        $data->tanggal_lahir = $request->input('tanggal_lahir');
+        $data->jenis_kelamin = $request->input('jenis_kelamin');
+        $data->alamat = $request->input('alamat');
+        $data->user = $request->input('user');
+        $data->foto_ktp = "";
+
+        if ($request->input('password') != "") {
+            $data->password = Hash::make($request->input('password'));
+        }
+
+        $data->save();
+        return redirect()->route('pembeli.list');
+    }
 }
