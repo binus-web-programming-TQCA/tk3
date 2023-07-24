@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
 
@@ -22,6 +23,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/staff', function () {
+//     return view('staff');
+// })->middleware(['auth', 'verified'])->name('staff');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('staffs', StaffController::class);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -32,7 +39,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Rute untuk pengguna dengan peran "admin"
 });
 
-Route::middleware(['auth', 'role:staf'])->group(function () {
+Route::middleware(['auth', 'role:staff'])->group(function () {
     // Rute untuk pengguna dengan peran "staf"
 });
 
