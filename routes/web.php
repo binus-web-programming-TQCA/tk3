@@ -26,9 +26,11 @@ Route::get('/dashboard', function () {
 // Route::get('/staff', function () {
 //     return view('staff');
 // })->middleware(['auth', 'verified'])->name('staff');
-Route::middleware(['auth'])->group(function () {
-    Route::resource('staffs', StaffController::class);
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/staff', [StaffController::class, 'edit'])->name('staff.edit');
+//     Route::patch('/staff', [StaffController::class, 'update'])->name('staff.update');
+//     Route::delete('/staff', [StaffController::class, 'destroy'])->name('staff.destroy');
+// });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,8 +41,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Rute untuk pengguna dengan peran "admin"
 });
 
-Route::middleware(['auth', 'role:staff'])->group(function () {
-    // Rute untuk pengguna dengan peran "staf"
+Route::middleware(['auth'])->group(function () {
+    Route::get('/staff', [StaffController::class, 'index'])->name('staffs.index');
+    Route::get('/staff/create', [StaffController::class, 'create'])->name('staffs.create');
+    Route::get('/staff/edit/{id}', [StaffController::class, 'edit'])->name('staffs.edit');
+    Route::post('/staff/update/{id}', [StaffController::class, 'update'])->name('staffs.update');
+    Route::get('/staff/destroy/{id}', [StaffController::class, 'destroy'])->name('staffs.destroy');
+    // Route::get('/staff/{id}', [StaffControllerController::class, 'view'])->name('staffs.view');
+    Route::post('/staff', [StaffController::class, 'store'])->name('staffs.store');
 });
 
 Route::middleware(['auth', 'role:pembeli'])->group(function () {
