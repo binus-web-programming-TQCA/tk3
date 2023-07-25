@@ -31,6 +31,16 @@
                         {{ __('Barang') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('transaksi.index')" :active="request()->routeIs('transaksi.index')">
+                        {{ __('Transaksi') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('transaksi.list_order')" :active="request()->routeIs('transaksi.list_order')">
+                        {{ __('List Transaksi') }}
+                    </x-nav-link>
+                </div>
                 @endif
                 @if ( Auth::user()->role =='staff' )
                 <!-- Navigation Links -->
@@ -63,14 +73,13 @@
                 @if ( Auth::user()->role =='pembeli' )
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('transaksi.index')" :active="request()->routeIs('transaksi.index')">
+                        {{ __('Transaksi') }}
                     </x-nav-link>
                 </div>
+                @endif
             </div>
-            @endif
-
-        </div>
+        
 
         <!-- Settings Dropdown -->
         <div class="hidden sm:flex sm:items-center sm:ml-6">
