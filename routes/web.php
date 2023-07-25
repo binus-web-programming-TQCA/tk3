@@ -3,8 +3,10 @@
 use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
+use App\Models\Transaksi;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
+    Route::get('/transaksi/create/{id}', [TransaksiController::class, 'create'])->name('transaksi.create');
+    Route::get('/list-transaksi', [TransaksiController::class, 'list_order'])->name('transaksi.list_order');
+    Route::get('/list-transaksi/submit/{id}', [TransaksiController::class, 'submit'])->name('transaksi.submit');
+
 });
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Rute untuk pengguna dengan peran "admin"
