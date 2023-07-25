@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
@@ -51,7 +52,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/staff', [StaffController::class, 'store'])->name('staffs.store');
 });
 
-Route::middleware(['auth', 'role:pembeli'])->group(function () {
-    // Rute untuk pengguna dengan peran "pembeli"
+Route::middleware(['auth'])->group(function () {
+    Route::get('/data-barang', [DataBarangController::class, 'index'])->name('barang.index');
+    Route::get('/data-barang/create', [DataBarangController::class, 'create'])->name('barang.create');
+    Route::get('/data-barang/edit/{id}', [DataBarangController::class, 'edit'])->name('barang.edit');
+    Route::post('/data-barang/update/{id}', [DataBarangController::class, 'update'])->name('barang.update');
+    Route::get('/data-barang/destroy/{id}', [DataBarangController::class, 'destroy'])->name('barang.destroy');
+    // Route::get('/data-barang/{id}', [StaffControllerController::class, 'view'])->name('staffs.view');
+    Route::post('/data-barang', [DataBarangController::class, 'store'])->name('barang.store');
 });
 require __DIR__.'/auth.php';
