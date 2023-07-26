@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pembeli;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -47,12 +48,26 @@ class PembeliController extends Controller
         $data->foto_ktp = "";
         $data->password = Hash::make($request->input('password'));
         $data->save();
+
+        $user = new User();
+        $user->id = $data->id;
+        $user->name = $data->nama;
+        $user->username = $data->user;
+        $user->password = $data->password;
+        $user->jenis_kelamin = $data->jenis_kelamin;
+        $user->role = "pembeli";
+        $user->save();
+
         return redirect()->route('pembeli.list');
     }
 
     public function delete($id) {
         $data = Pembeli::findOrFail($id);
         $data->delete();
+
+        $user = User::findOrFail($id);
+        $user->delete();
+
         return redirect()->route('pembeli.list');
     }
 
@@ -91,6 +106,15 @@ class PembeliController extends Controller
         }
 
         $data->save();
+
+        $user = User::findOrFail($id);
+        $user->name = $data->nama;
+        $user->username = $data->user;
+        $user->password = $data->password;
+        $user->jenis_kelamin = $data->jenis_kelamin;
+        $user->role = "pembeli";
+        $user->save();
+
         return redirect()->route('pembeli.list');
     }
 }
