@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/list-transaksi/submit/{id}', [TransaksiController::class, 'submit'])->name('transaksi.submit');
 
 });
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'role:staff,admin'])->group(function () {
     Route::get('/pembeli', [PembeliController::class, 'list'])->name('pembeli.list');
     Route::get('/pembeli/add', [PembeliController::class, 'add'])->name('pembeli.add');
     Route::get('/pembeli/edit/{id}', [PembeliController::class, 'edit'])->name('pembeli.edit');
@@ -56,7 +56,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/pembeli', [PembeliController::class, 'store'])->name('pembeli.store');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('/staff', [StaffController::class, 'index'])->name('staffs.index');
     Route::get('/staff/create', [StaffController::class, 'create'])->name('staffs.create');
     Route::get('/staff/edit/{id}', [StaffController::class, 'edit'])->name('staffs.edit');
@@ -66,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/staff', [StaffController::class, 'store'])->name('staffs.store');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','role:staff,admin'])->group(function () {
     Route::get('/data-barang', [DataBarangController::class, 'index'])->name('barang.index');
     Route::get('/data-barang/create', [DataBarangController::class, 'create'])->name('barang.create');
     Route::get('/data-barang/edit/{id}', [DataBarangController::class, 'edit'])->name('barang.edit');
